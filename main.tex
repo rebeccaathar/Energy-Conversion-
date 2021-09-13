@@ -55,15 +55,12 @@
 \usepackage[utf8]{inputenc}             % Codificacao do documento (conversão automática dos acentos)
 \usepackage{lastpage}                   % Usado pela Ficha catalográfica
 \usepackage{indentfirst}                % Indenta o primeiro parágrafo de cada seção.
-\usepackage{color}                              % Controle das cores
+\usepackage{color}                      % Controle das cores
 \usepackage{graphicx}                   % Inclusão de gráficos
 \usepackage{microtype}                  % para melhorias de justificação
-% ---
-                
-% ---
-% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
-% ---
-\usepackage{lipsum}                             % para geração de dummy text
+\definecolor{blue}{RGB}{41,5,195}
+%\emergencystretch=1.5em
+%\tolerance=270
 % ---
 
 % ---
@@ -78,6 +75,7 @@
 \usepackage{indentfirst}                         % Indenta o primeiro parágrafo de cada seção.
 \usepackage{color}                               % Controle das cores
 \usepackage{microtype}                           % para melhorias de justificação
+\usepackage[section]{placeins}
 
 % --- 
 % CONFIGURAÇÕES DE PACOTES
@@ -100,6 +98,7 @@
         \fi}%
 
 \usepackage{amsmath, amssymb, amscd, amsthm, amsfonts}
+\usepackage{physics}
 \usepackage{bm}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -194,9 +193,9 @@ de um fio deflete uma bússola. Sua invenção, presente na
 figura~\ref{fig:chap:introdução:1}, consistia de um pedaço de ferro maciço em formato
 de ferradura de cavalo envolvido por um condutor. O grande destaque do dispositivo
 era a proporção de seu peso próprio com o peso que conseguia levantar, pesando apenas
-200 gramas o aparelho sustentava cargas de até aproximadamente 4 quilos.\\
+200 gramas o aparelho sustentava cargas de até aproximadamente 4 quilos.
 
-\begin{figure}[htp]
+\begin{figure}[!htp]
   \centering
   \includegraphics[width=0.2\columnwidth]{Sturgeon_electromagnet.png}
   \label{fig:chap:introdução:1}
@@ -208,7 +207,7 @@ pedaço de ferro. Seu princípio de funcionamento serviu para o decodificador de
 em 1850 por Alfred Vail, o dispositivo move a ponta de uma haste de metal para
 martelar uma superfície e produzir um sinal sonoro. Era usual a transmissão das
 mensagens em código morse pelo meio.
-\begin{figure}[htp]
+\begin{figure}[!htp]
   \centering
   \includegraphics[width=0.3\columnwidth]{Wallace_Study-Telegraph.jpg}
   \label{fig:chap:introdução:2}
@@ -239,15 +238,7 @@ ou igualmente em sua forma diferencial:
 \begin{gather}
   \underbrace{\nabla \times \bm{B}}_\text{campo magnético} = \mu_0 \left( \underbrace{\bm{J}}_\text{corrente} + \underbrace{\varepsilon \dfrac{\partial \bm{E}}{\partial t}}_\text{componente variante no tempo} \right) 
 \end{gather}
-
-Ignorando por hora a componente variante no tempo, podemos nos focar no resultado
-interessante para máquinas assíncronas: corrente elétrica em um condutor gera um
-campo magnético, como ilustrado na figura~\ref{fig:chap:embasamento:1}. Enrolando
-um condutor em forma helicoidal (um solenóide), que equivale a alinhar anéis em
-sequência, teremos uma amplificação do campo, devido à contribuição de cada porção
-de corrente no condutor, como exposto na figura~\ref{fig:chap:embasamento:2}.
-
-\begin{figure}[htp]
+\begin{figure}[!htp]
   \centering
 \begin{tikzpicture}
   % anel com corrente
@@ -278,55 +269,110 @@ de corrente no condutor, como exposto na figura~\ref{fig:chap:embasamento:2}.
   \draw[->] (-4,0,0) [y={(0,0,1)}] -- ++(0,1,0) node[left, near end]{$x$};
   \draw[->] (-4,0,0) [y={(0,0,1)}] -- ++(1,0,0) node[above, near end]{$y$};
 \end{tikzpicture}
-\caption{Campo magnético atravessando um anel com corrente anti-horária}
 \label{fig:chap:embasamento:1}
+\caption{Campo magnético atravessando um anel com corrente anti-horária}
 \end{figure}
 
-\begin{figure}[htp]
+Ignorando por hora a componente variante no tempo, podemos nos focar no resultado
+interessante para máquinas assíncronas: corrente elétrica em um condutor gera um
+campo magnético, como ilustrado na figura~\ref{fig:chap:embasamento:1}. Enrolando
+um condutor em forma helicoidal (um solenóide), que equivale a alinhar anéis em
+sequência, teremos uma amplificação do campo, devido à contribuição de cada porção
+de corrente no condutor, como exposto na figura~\ref{fig:chap:embasamento:2}.
+
+\begin{figure}[!htp]
   \centering
   \includegraphics[width=0.5\columnwidth]{2560px-VFPt_Solenoid_correct2.svg.png}
-  \caption{Campo magnético dentro de um solenóide}
   \label{fig:chap:embasamento:2}
+  \caption{Campo magnético dentro de um solenóide}
 \end{figure}
 
 \section{Magnetismo e Ferromagnetismo}
 A organização e disposição da estrutura e substância afetam o quanto um material
 é suscetível à passagem de campos magnéticos. Seguindo a descrição proposta em
 \cite{book:balanis}, podemos analisar as propriedades macroscópicas de materiais
-em função de sua organização microscópica.\\
+em função de sua organização microscópica.\newline
 
 Sem se ater à descrições envolvendo mecânica quântica, afinal tal precisão se mostra
 desnecessária para as descrições aqui feitas, podemos nos utilizar de um modelo
 atômico simples, com elétrons em órbitas circulares em volta de um núcleo positivo
 (figura~\ref{fig:chap:embasamento:3}). Podemos então enxergar um material como uma
-disposição de pequenos dipolos magnéticos com momentos de dipolo magnético $d \bm{m}_i$
+disposição de pequenos dipolos magnéticos com momentos de dipolo magnético $\dd \bm{m}_i$
+dado por:
 
-\begin{figure}[htp]
+\begin{gather}
+  \dd{\bm{m}_i} = I_i \dd \bm{s}_i = \bm{\hat{n}}I_i \dd s_i \quad (\text{A}-\text{m}^2)
+\end{gather}
+
+\begin{figure}[!htp]
   \centering
-  \includegraphics[width=0.9\columnwidth]{balanis3.png}
-  \caption{Modelo atômico empregado e ciclos equivalentes \cite{book:balanis}}
+  \includegraphics[width=0.5\columnwidth]{balanis3.png}
   \label{fig:chap:embasamento:3}
+  \caption{Modelo atômico empregado e ciclos equivalentes \cite{book:balanis}}
 \end{figure}
 
-\begin{figure}[htp]
+Podemos então somar as contribuições dos momentos de cada dipolo para átomos com
+múltiplos elétrons em órbita tendo a razão do número de elétrons por unidade de
+volume $N_m$ em uma porção de volume $\Delta v$:
+\begin{gather}
+\bm{m}_t = \sum_{i = 1}^{N_m \Delta v}{\dd{\bm{m}_i}}
+\end{gather}
+E definir o vetor de polarização magnética (magnetização) $\bm{M}$ como:
+\begin{gather}
+  \bm{M} = \underset{\Delta v \to 0}{\lim} \left[ \dfrac{1}{\Delta v}\bm{m}_t \right] = 
+  \underset{\Delta v \to 0}{\lim} \left[ \dfrac{1}{\Delta v} \sum_{i = 1}^{N_m \Delta v}{\dd{\bm{m}_i}} \right]
+  \quad (\text{A}/\text{m}^2)
+\end{gather}
+Assumindo que cada caminho tenha um momento médio:
+\begin{gather}
+  \dd \bm{m}_i = \dd \bm{m}_{av} = \bm{\hat{n}}(I \dd s)_{av} \to
+  \bm{M} = N_m \dd \bm{m}_{av} = \bm{\hat{n}} n_m (i \dd s)_{av}
+\end{gather}
+
+Podemos então visualizar o comportamento do material antes e após a aplicação de um
+vetor densidade de fluxo magnético médio $\bm{B}_a$ na figura~\ref{fig:chap:embasamento:4},
+com os dipolos se alinhando à direção do campo.
+
+\begin{figure}[!htp]
   \centering
-  \includegraphics[width=0.9\columnwidth]{balanis2.png}
-  \caption{Dipolos magnéticos se alinhando na presença de um campo \cite{book:balanis}}
+  \includegraphics[width=0.5\columnwidth]{balanis2.png}
   \label{fig:chap:embasamento:4}
+  \caption{Dipolos magnéticos se alinhando na presença de um campo \cite{book:balanis}}
 \end{figure}
 
-\begin{figure}[htp]
+Podemos elaborar na ilustração com outra simplificação, utilizando um bloco de material
+magnético, Fazendo com que neste bloco tenhamos as contribuições do vetor de magnetização
+no vetor densidade de fluxo:
+\begin{gather}
+  \bm{B} = \mu_0 (\bm{H}_a + \bm{M})
+\end{gather}
+
+\begin{figure}[!htp]
   \centering
-  \includegraphics[width=0.9\columnwidth]{balanis.png}
-  \caption{Vetores Campo Magnético e de Magnetização em um bloco \cite{book:balanis}}
+  \includegraphics[width=0.5\columnwidth]{balanis.png}
   \label{fig:chap:embasamento:5}
+  \caption{Vetores Campo Magnético e de Magnetização em um bloco \cite{book:balanis}}
 \end{figure}
 
-\begin{figure}[htp]
+Com $\bm{H}_a$ sendo o vetor intensidade de campo magnético médio. Podemos então
+escrever:
+\begin{gather}
+  \bm{B} = \mu_s \bm{H}_a \\
+  \bm{M} = \chi_m \bm{H}_a
+\end{gather}
+Com $\mu_s$ sendo a permissividade magnética do meio e $\chi_m$ a susceptibilidade
+magnética. Assim:
+
+\begin{gather}
+  \bm{B} = \mu_0 (\bm{H}_a \chi_m \bm{H}_a) = \mu_0(1 + \chi_m) \bm{H}_a = \mu_s \bm{H}_a\\
+  \mu_s = \mu_0 (1 + \chi_m)
+\end{gather}
+
+\begin{figure}[!htp]
   \centering
   \includegraphics[width=0.2\columnwidth]{Elecmagnet.png}
-  \caption{Solenoide amplificando o campo magnético no núcleo}
   \label{fig:chap:embasamento:6}
+  \caption{Solenoide amplificando o campo magnético no núcleo}
 \end{figure}
 
 \bibliography{refs}
