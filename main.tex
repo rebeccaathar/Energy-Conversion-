@@ -172,6 +172,14 @@
 % ---
 
 % ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+% ---
 % inserir o sumario
 % ---
 \pdfbookmark[0]{\contentsname}{toc}
@@ -270,7 +278,7 @@ ou igualmente em sua forma diferencial:
   \draw[->] (-4,0,0) [y={(0,0,1)}] -- ++(1,0,0) node[above, near end]{$y$};
 \end{tikzpicture}
 \label{fig:chap:embasamento:1}
-\caption{Campo magnético atravessando um anel com corrente anti-horária}
+\caption{Campo magnético atravessando um anel com corrente anti-horária (Autores)}
 \end{figure}
 
 Ignorando por hora a componente variante no tempo, podemos nos focar no resultado
@@ -291,7 +299,7 @@ de corrente no condutor, como exposto na figura~\ref{fig:chap:embasamento:2}.
 A organização e disposição da estrutura e substância afetam o quanto um material
 é suscetível à passagem de campos magnéticos. Seguindo a descrição proposta em
 \cite{book:balanis}, podemos analisar as propriedades macroscópicas de materiais
-em função de sua organização microscópica.\newline
+em função de sua organização microscópica.
 
 Sem se ater à descrições envolvendo mecânica quântica, afinal tal precisão se mostra
 desnecessária para as descrições aqui feitas, podemos nos utilizar de um modelo
@@ -306,7 +314,7 @@ dado por:
 
 \begin{figure}[!htp]
   \centering
-  \includegraphics[width=0.5\columnwidth]{balanis3.png}
+  \includegraphics[width=0.9\columnwidth]{balanis3.png}
   \label{fig:chap:embasamento:3}
   \caption{Modelo atômico empregado e ciclos equivalentes \cite{book:balanis}}
 \end{figure}
@@ -335,21 +343,21 @@ com os dipolos se alinhando à direção do campo.
 
 \begin{figure}[!htp]
   \centering
-  \includegraphics[width=0.5\columnwidth]{balanis2.png}
+  \includegraphics[width=0.9\columnwidth]{balanis2.png}
   \label{fig:chap:embasamento:4}
   \caption{Dipolos magnéticos se alinhando na presença de um campo \cite{book:balanis}}
 \end{figure}
 
 Podemos elaborar na ilustração com outra simplificação, utilizando um bloco de material
 magnético, Fazendo com que neste bloco tenhamos as contribuições do vetor de magnetização
-no vetor densidade de fluxo:
+no vetor densidade de fluxo (figura~\ref{fig:chap:embasamento:5}):
 \begin{gather}
   \bm{B} = \mu_0 (\bm{H}_a + \bm{M})
 \end{gather}
 
 \begin{figure}[!htp]
   \centering
-  \includegraphics[width=0.5\columnwidth]{balanis.png}
+  \includegraphics[width=0.7\columnwidth]{balanis.png}
   \label{fig:chap:embasamento:5}
   \caption{Vetores Campo Magnético e de Magnetização em um bloco \cite{book:balanis}}
 \end{figure}
@@ -360,20 +368,73 @@ escrever:
   \bm{B} = \mu_s \bm{H}_a \\
   \bm{M} = \chi_m \bm{H}_a
 \end{gather}
-Com $\mu_s$ sendo a permissividade magnética do meio e $\chi_m$ a susceptibilidade
-magnética. Assim:
+Com $\mu_s(H/m)$ sendo a permissividade magnética do meio e $\chi_m(\text{adimensional})$
+a susceptibilidade magnética. Assim:
 
 \begin{gather}
-  \bm{B} = \mu_0 (\bm{H}_a \chi_m \bm{H}_a) = \mu_0(1 + \chi_m) \bm{H}_a = \mu_s \bm{H}_a\\
+  \bm{B} = \mu_0 (\bm{H}_a + \chi_m \bm{H}_a) = \mu_0(1 + \chi_m) \bm{H}_a = \mu_s \bm{H}_a\\
   \mu_s = \mu_0 (1 + \chi_m)
 \end{gather}
 
+E temos enfim a definição de permissividade magnética relativa:
+\begin{gather}
+  \mu_{sr} = \dfrac{\mu_s}{\mu_0} = 1 + \chi_m
+\end{gather}
+
+Podemos então prever o comportamento de um material por meio de sua permissividade
+magnética relativa, quanto maior sua permissividade, mais suscetível ele será à alinhar
+seus dipolos magnéticos a um campo externo aplicado no material. Desse ponto de vista
+temos comportamentos diversos de materiais, estas que darão uma denominação ao material
+de: diamagnético, não-magnético, ferromagnético, paramagnético,... em conformidade à
+sua permissividade. A seguir temos uma tabela com os valores de permissividade de alguns
+materiais e sua denominação:
+
+\begin{table}[htpb]
+  \centering
+  \caption{Valores de $\mu_{sr}$ para alguns materiais \cite{book:balanis}}
+  \label{tab:chap1:sec2:mu_values}
+  \begin{tabular}{c c c}
+    \hline
+    Material & Classificação & Permissividade Relativa $\mu_{sr}$\\
+    \hline
+    Bismute & Diamagnético & 0,999834\\
+    Prata & Diamagnético & 0,99998\\
+    Chumbo & Diamagnético & 0,999983\\
+    Cobre & Diamagnético & 0,999991\\
+    Vácuo & Não-Magnético & 1,0\\
+    Ar & Paramagnético & 1,0000004\\
+    Alumínio & Paramagnético & 1,00002\\
+    Cobalto & Ferromagnético & 250\\
+    Alumínio & Ferromagnético & 600\\
+    Ferro & Ferromagnético & 7000\\
+    Ferro Purificado & Ferromagnético & 200.000\\
+    \hline
+  \end{tabular}
+\end{table}
+
+Para nosso trabalho, os materiais ferromagnéticos são os mais interessantes, nome
+indicando que se comportam similarmente ao ferro. Estes materiais possuem seus dipolos
+desordenados na ausência de campo magnético, porém ao serem excitados seus dipolos se
+alinham com pouca resistência, se mostrando um meio propício para a propagação desses
+campos. Este comportamento é extremamente interessante, pois, combinada com a indução
+pela lei de ampère, podemos inserir campos magnéticos controlados por meio de um
+solenoide em um material ferromagnético e utilizá-los para direcionar o campo
+em um caminho conveniente sem grande dissipação (figura~\ref{fig:chap:embasamento:6}).
+
 \begin{figure}[!htp]
   \centering
-  \includegraphics[width=0.2\columnwidth]{Elecmagnet.png}
+  \includegraphics[width=0.7\columnwidth]{Electromagnet_with_gap.svg.png}
   \label{fig:chap:embasamento:6}
-  \caption{Solenoide amplificando o campo magnético no núcleo}
+  \caption{Solenoide inserindo um campo magnético no núcleo, \cite{web:wikipedia:electromagnet}}
 \end{figure}
+
+Finalizamos então recordando a modelagem matemática desenvolvida ao longo do
+curso de \cite{book:fitzgerald}, onde abstraímos a complexidade da modelagem de campos
+por meio do conceito de Força Magneto-motriz e Relutância, trabalhando com fluxos e
+comprimentos médios para a análise dos dispositivos.
+
+\chapter{Motores}\label{chap:Motores}
+Este capítulo discute a aplicação de eletroímãs no contexto de motores.
 
 \bibliography{refs}
 
