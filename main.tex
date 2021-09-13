@@ -155,6 +155,14 @@
 
 \imprimirfolhaderosto*
 
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}
+  Este trabalho condensa contexto histórico, embasamento e modelagem matemática e
+  aplicações do Eletroímã. O texto se inicia com uma apresentação do concebimento
+  do eletroímã e mostrando algumas aplicações de forma rasa, aprofunda na modelagem
+  matemática e elabora nas aplicações.
+\end{resumo}
+
 
 % ---
 % inserir lista de ilustrações
@@ -174,23 +182,51 @@
 
 % \tableofcontents
 
+%% Introdução
+
 \part{Introdução}
 \chapter[Contexto Histórico]{Contexto Histórico}
 
-\section{A Invenção do Eletroímã}\label{chap:introdução}
-Eletroímãs estão presentes desde 1824 com a invenção de Hans Christian Ørsted após
-sua descorberta de 1820 onde descreve que a corrente elétrica de um fio deflete 
-uma bússola. Sua invenção, presente na figura~\ref{fig:chap:introdução:1},
-consistia de um pedaço de ferro maciço em formato de ferradura de cavalo envolvido
-por um condutor
+\section{A Invenção do Eletroímã}\label{chap:introdução:sec:invenção}
+Eletroímãs estão presentes desde 1824 com a invenção de William Sturgeon após
+a descorberta de Hans Christian Ørsted em 1820 onde descreve que a corrente elétrica
+de um fio deflete uma bússola. Sua invenção, presente na
+figura~\ref{fig:chap:introdução:1}, consistia de um pedaço de ferro maciço em formato
+de ferradura de cavalo envolvido por um condutor. O grande destaque do dispositivo
+era a proporção de seu peso próprio com o peso que conseguia levantar, pesando apenas
+200 gramas o aparelho sustentava cargas de até aproximadamente 4 quilos.\\
 
 \begin{figure}[htp]
   \centering
   \includegraphics[width=0.2\columnwidth]{Sturgeon_electromagnet.png}
   \label{fig:chap:introdução:1}
-  \caption{Eletroímã inventado por Ørsted}
+  \caption{Eletroímã de Sturgeon \cite{web:wikipedia:electromagnet}}
+\end{figure}
+O dispositivo possuía a desvantagem de não ser muito eficiente, pois o mesmo utilizava
+fios com isolamento pouco flexível, que limitou o número de voltas envolvendo o
+pedaço de ferro. Seu princípio de funcionamento serviu para o decodificador de telégrafo. Inventado
+em 1850 por Alfred Vail, o dispositivo move a ponta de uma haste de metal para
+martelar uma superfície e produzir um sinal sonoro. Era usual a transmissão das
+mensagens em código morse pelo meio.
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=0.3\columnwidth]{Wallace_Study-Telegraph.jpg}
+  \label{fig:chap:introdução:2}
+  \caption{Aparelho de telégrafo \cite{web:wikipedia:telegraph}}
 \end{figure}
 
+\section{Aplicações} \label{chap:introducao:sec:aplicações}
+O eletroímã ganhou várias aplicações conforme seu funcionamento foi explorado, o
+eletroímã foi empregado em mais e mais dispositivos. Neste trabalho damos enfoque
+às seguintes aplicações:
+\begin{itemize}
+  \item Motores
+  \item Transformadores
+  \item Relés
+  \item Levitação Magnética
+\end{itemize}
+
+%% Desenvolvimento
 
 \part{Desenvolvimento}
 \chapter[Embasamento Matemático]{Embasamento Matemático}\label{chap:embasamento}
@@ -209,7 +245,7 @@ interessante para máquinas assíncronas: corrente elétrica em um condutor gera
 campo magnético, como ilustrado na figura~\ref{fig:chap:embasamento:1}. Enrolando
 um condutor em forma helicoidal (um solenóide), que equivale a alinhar anéis em
 sequência, teremos uma amplificação do campo, devido à contribuição de cada porção
-de corrente no condutor, como ilustrado na figura~\ref{fig:chap:embasamento:2}.
+de corrente no condutor, como exposto na figura~\ref{fig:chap:embasamento:2}.
 
 \begin{figure}[htp]
   \centering
@@ -253,12 +289,46 @@ de corrente no condutor, como ilustrado na figura~\ref{fig:chap:embasamento:2}.
   \label{fig:chap:embasamento:2}
 \end{figure}
 
+\section{Magnetismo e Ferromagnetismo}
+A organização e disposição da estrutura e substância afetam o quanto um material
+é suscetível à passagem de campos magnéticos. Seguindo a descrição proposta em
+\cite{book:balanis}, podemos analisar as propriedades macroscópicas de materiais
+em função de sua organização microscópica.\\
+
+Sem se ater à descrições envolvendo mecânica quântica, afinal tal precisão se mostra
+desnecessária para as descrições aqui feitas, podemos nos utilizar de um modelo
+atômico simples, com elétrons em órbitas circulares em volta de um núcleo positivo
+(figura~\ref{fig:chap:embasamento:3}). Podemos então enxergar um material como uma
+disposição de pequenos dipolos magnéticos com momentos de dipolo magnético $d \bm{m}_i$
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=0.9\columnwidth]{balanis3.png}
+  \caption{Modelo atômico empregado e ciclos equivalentes \cite{book:balanis}}
+  \label{fig:chap:embasamento:3}
+\end{figure}
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=0.9\columnwidth]{balanis2.png}
+  \caption{Dipolos magnéticos se alinhando na presença de um campo \cite{book:balanis}}
+  \label{fig:chap:embasamento:4}
+\end{figure}
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=0.9\columnwidth]{balanis.png}
+  \caption{Vetores Campo Magnético e de Magnetização em um bloco \cite{book:balanis}}
+  \label{fig:chap:embasamento:5}
+\end{figure}
+
 \begin{figure}[htp]
   \centering
   \includegraphics[width=0.2\columnwidth]{Elecmagnet.png}
   \caption{Solenoide amplificando o campo magnético no núcleo}
-  \label{fig:chap:embasamento:3}
+  \label{fig:chap:embasamento:6}
 \end{figure}
 
+\bibliography{refs}
 
 \end{document}
